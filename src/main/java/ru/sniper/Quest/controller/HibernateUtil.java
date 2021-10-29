@@ -9,8 +9,32 @@ import org.hibernate.service.ServiceRegistryBuilder;
 import ru.sniper.Quest.model.User;
 
 public class HibernateUtil {
+    private static final SessionFactory sessionFactory = createSessionFactory();
 
-    private static SessionFactory sessionFactory;
+    public static SessionFactory createSessionFactory() {
+        try {
+            Configuration configuration = new Configuration().configure();
+            ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
+            configuration.addAnnotatedClass(User.class);
+            SessionFactory newSessionFactory = configuration.buildSessionFactory(serviceRegistry);
+            return newSessionFactory;
+        } catch (Exception ex) {
+            System.err.println("Initial SessionFactory creation failed." + ex);
+            throw new ExceptionInInitializerError(ex);
+        }
+    }
+
+    public static SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
+    public static void shutdown() {
+        getSessionFactory().close();
+    }
+}
+
+
+    /*private static SessionFactory sessionFactory;
 
     private HibernateUtil() {}
 
@@ -28,32 +52,31 @@ public class HibernateUtil {
         }
         return sessionFactory;
     }
-}
-
+}*/
 /*
+
     private static final SessionFactory sessionFactory
             = configureSessionFactory();
     private static ServiceRegistry serviceRegistry;
 
-    */
-/**
+
+*//**
      * Создание фабрики
      * @return {@link SessionFactory}
      * @throws HibernateException
-     *//*
+*//*
 
     private static SessionFactory configureSessionFactory()
             throws HibernateException {
 
         Configuration configuration = new Configuration().configure();
-        configuration.addAnnotatedClass(User.class);
+        //configuration.addAnnotatedClass(User.class);
         serviceRegistry = new ServiceRegistryBuilder().applySettings(
                 configuration.getProperties()).buildServiceRegistry();
         return configuration.buildSessionFactory(serviceRegistry);
     }
 
-    */
-/**
+*//**
      * Получить фабрику сессий
      * @return {@link SessionFactory}
      *//*

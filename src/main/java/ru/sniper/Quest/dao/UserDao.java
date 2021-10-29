@@ -15,6 +15,7 @@ public class UserDao {
     }
 
     public void save(User user) {
+        //В текущей конфигурации тут вылетает java.lang.NullPointerException. Для теста использую класс Main
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         session.save(user);
