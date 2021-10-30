@@ -1,5 +1,6 @@
 package ru.sniper.Quest.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import ru.sniper.Quest.dao.UserDao;
 import ru.sniper.Quest.model.Result;
 import ru.sniper.Quest.model.User;
@@ -7,6 +8,7 @@ import ru.sniper.Quest.model.User;
 import java.util.List;
 
 public class UserService {
+    @Autowired
     private UserDao userDao = new UserDao();
 
     public UserService() {
