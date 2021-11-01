@@ -12,15 +12,12 @@
         <th>First Name</th>
         <th>Last Name</th>
     </tr>
-    <tr th:if="${#lists.isEmpty(ru.sniper.Quest.entity.UserEntity)}">
-        <td colspan="7">No Records found. Add some...!</td>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.login}"></td>
+        <td th:text="${user.ball}"></td>
     </tr>
-    <tr th:each="user : ${ru.sniper.Quest.entity.UserEntity}">
-        <td th:text="${ru.sniper.Quest.entity.UserEntity.id}"></td>
-        <td th:text="${ru.sniper.Quest.entity.UserEntity.login}"></td>
-        <td th:text="${ru.sniper.Quest.entity.UserEntity.ball}"></td>
-        <td><a th:href="'/' + ${ru.sniper.Quest.entity.UserEntity.id}">___</a></td>
-    </tr>
+
 </table>
 </table>
 </body>
