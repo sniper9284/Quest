@@ -1,40 +1,17 @@
 package ru.sniper.Quest.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import ru.sniper.Quest.dao.UserDao;
-import ru.sniper.Quest.model.Result;
-import ru.sniper.Quest.model.User;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import ru.sniper.Quest.entity.UserEntity;
 import java.util.List;
+import java.util.Optional;
 
-public class UserService {
-    @Autowired
-    private UserDao userDao = new UserDao();
+public interface UserService {
 
-    public UserService() {
-    }
+    Optional<UserEntity> getById(int id);
+    void saveUser(UserEntity userEntity);
+    void updateUser(int id, String login, int ball);
+    void deleteUser(UserEntity userEntity);
+    List<UserEntity> getAll();
 
-    public User findUser(int id) {
-        return userDao.findById(id);
-    }
-
-    public void saveUser(User user) {
-        userDao.save(user);
-    }
-
-    public void updateUser(User user) {
-        userDao.update(user);
-    }
-
-    public void deleteUser(User user) {
-        userDao.delete(user);
-    }
-
-    public List<User> findAllUser() {
-        return userDao.findAllUser();
-    }
-
-    public Result findResultById(int id) {
-        return userDao.findResultById(id);
-    }
 }
