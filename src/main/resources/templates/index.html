@@ -6,18 +6,28 @@
     <title>Start</title>
 </head>
 <body>
+<h1>Перед началом тестирования пожалуйста представьтесь</h1>
+<form class="form-horizontal" th:action="@{/}" th:object="${user}" method="post" role="form">
+    <div class="form-group">
+        <input type="text" th:name="login" placeholder="Введите желаемый логин." maxlength="100"/>
+    </div>
+    <button type="submit">Отправить.</button>
+</form>
+
+<h2>Прошли тестирование</h2>
 <table>
     <tr>
         <th>ID</th>
-        <th>First Name</th>
-        <th>Last Name</th>
+        <th>Login</th>
+        <th>Ball</th>
+        <th>Удалить</th>
     </tr>
     <tr th:each="user : ${users}">
         <td th:text="${user.id}"></td>
         <td th:text="${user.login}"></td>
         <td th:text="${user.ball}"></td>
+        <td><a th:href="@{'/delete/{id}'(id=${user.id})}">Удалить</a></td>
     </tr>
-
 </table>
 </table>
 </body>

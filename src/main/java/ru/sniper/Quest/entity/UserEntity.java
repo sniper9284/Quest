@@ -25,4 +25,8 @@ public class UserEntity {
 
     public UserEntity() {
     }
+
+    public UserEntity(String login) {
+        this.setLogin(login);
+    }
 }
